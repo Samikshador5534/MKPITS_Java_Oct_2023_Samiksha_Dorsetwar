@@ -1,0 +1,12 @@
+h2 {
+  font-style: italic;
+  font: 200;
+  background-color: darkseagreen;
+  text-align: center;
+}
+p {
+  border: 0cap;
+  border-color: black;
+  font-style: oblique;
+  background-color: rgb(137, 129, 129);
+}

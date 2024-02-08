@@ -1,0 +1,8 @@
+body {
+  background-color: rgb(34, 158, 199);
+}
+p {
+  font-size: large;
+  color: chartreuse;
+  font-style: italic;
+}
