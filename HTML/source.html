@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- The <source> tag is used to specify multiple media resources for media elements, 
+    such as <video>, <audio>, and <picture>.
+   The <source> tag allows you to specify alternative video/audio/image files which 
+   the browser may choose from, based on browser support or viewport width. 
+   The browser will choose the first <source> it supports. -->
+    <audio controls="controls">
+      <source src="/songs/song.mp3" type="audio/mp3" />
+      <source src="/songs/song.mp3" type="audio/ogg" />
+
+      Your browser does not support the audio element.
+    </audio>
+  </body>
+</html>
