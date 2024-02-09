@@ -1,0 +1,10 @@
+p {
+  border: 10px dashed black;
+  padding: 70px;
+  background-image: url("/images/flower.jpeg");
+  background-position: scroll;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  font-size: larger;
+  background-color: rgb(45, 185, 94);
+}

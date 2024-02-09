@@ -1,0 +1,5 @@
+p {
+  background-color: blue;
+  background-image: url("/images/dog.jpeg");
+  background-repeat: no-repeat;
+}

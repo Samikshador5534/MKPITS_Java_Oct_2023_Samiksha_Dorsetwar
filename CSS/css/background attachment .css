@@ -1,0 +1,9 @@
+* {
+  background-color: rgb(115, 115, 185);
+  background-image: url("/images/flower.jpeg");
+  background-repeat: repeat;
+  background-position: center;
+  background-attachment: scroll;
+  background-size: 400px;
+  font-size: larger;
+}

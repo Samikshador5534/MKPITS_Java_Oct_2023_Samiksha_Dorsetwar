@@ -1,0 +1,7 @@
+#example1 {
+  border: 10px dotted black;
+  padding: 55px;
+  background: lightblue;
+  background-clip: border-box;
+  font-size: larger;
+}

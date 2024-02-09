@@ -1,0 +1,10 @@
+* {
+  background-color: rgb(37, 113, 188);
+  background-image: url("/images/mahadevjpeg.jpeg");
+  background-size: 50%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  font-size: larger;
+  background-attachment: fixed;
+  color: rgb(53, 5, 15);
+}

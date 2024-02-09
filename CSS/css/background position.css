@@ -1,0 +1,7 @@
+* {
+  background-color: rgb(115, 115, 185);
+  background-image: url("/images/dog.jpeg");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: fixed;
+}
