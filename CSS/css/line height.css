@@ -1,0 +1,13 @@
+p {
+  text-align: center;
+  color: rgb(57, 131, 4);
+  background-color: bisque;
+  direction: start;
+  letter-spacing: 3px;
+  line-height: 60%;
+}
+h1 {
+  line-height: 130%;
+  color: blueviolet;
+  background-color: aqua;
+}

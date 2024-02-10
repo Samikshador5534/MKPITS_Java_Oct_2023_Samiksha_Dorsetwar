@@ -1,0 +1,9 @@
+p {
+  color: rgb(47, 73, 20);
+  text-shadow: 2px 2px 5px rgb(181, 241, 59);
+  text-transform: capitalize;
+  text-transform: initial;
+  text-transform: lowercase;
+  text-transform: uppercase;
+  font-size: medium;
+}

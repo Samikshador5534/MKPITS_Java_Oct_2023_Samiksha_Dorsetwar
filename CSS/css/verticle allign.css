@@ -1,0 +1,10 @@
+span {
+  color: darkmagenta;
+
+  vertical-align: bottom;
+  vertical-align: super;
+  vertical-align: middle;
+  vertical-align: baseline;
+  vertical-align: text-top;
+  vertical-align: super;
+}
