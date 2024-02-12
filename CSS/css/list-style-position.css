@@ -1,0 +1,6 @@
+ul {
+  list-style-position: outside;
+  list-style-position: inside;
+  list-style-position: inherit;
+  list-style-position: inside;
+}

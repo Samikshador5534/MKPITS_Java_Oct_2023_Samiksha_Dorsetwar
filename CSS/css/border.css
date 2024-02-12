@@ -1,0 +1,6 @@
+p {
+  border-style: dashed;
+  border-style: groove;
+  border-style: solid;
+  border-style: dotted solid double dashed;
+}

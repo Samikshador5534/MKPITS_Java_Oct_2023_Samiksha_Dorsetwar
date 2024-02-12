@@ -1,0 +1,8 @@
+table,
+th,
+td {
+  border: 2px solid plum;
+
+  border-collapse: collapse;
+  border-collapse: inherit;
+}

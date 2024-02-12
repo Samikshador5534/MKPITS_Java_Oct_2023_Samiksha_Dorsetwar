@@ -1,0 +1,6 @@
+p {
+  border-style: groove;
+  border-width: 3px;
+  border-width: thin medium 3px 10px;
+  border-width: 5px;
+}

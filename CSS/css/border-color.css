@@ -1,0 +1,5 @@
+p {
+  border-style: dashed;
+  border-color: chocolate;
+  border-color: blue rgb(86, 8, 8) gold;
+}

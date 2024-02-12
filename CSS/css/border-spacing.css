@@ -1,0 +1,10 @@
+table,
+th,
+td {
+  border: 2px solid plum;
+
+  border-collapse: collapse;
+  border-collapse: inherit;
+  border-spacing: 5px 10px;
+  padding: 2px;
+}
