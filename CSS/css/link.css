@@ -1,0 +1,35 @@
+.container {
+  background-color: rgb(23, 22, 22);
+  padding: 5px;
+  color: rgb(240, 243, 246);
+  text-align: right;
+  /* float: right; */
+  direction: rtl;
+}
+.container > div {
+  padding: 5px;
+
+  /* padding-left: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px; */
+  display: inline;
+}
+div:hover {
+  color: rgb(108, 233, 6);
+  text-decoration: underline;
+}
+
+a:link {
+  position: relative;
+  color: aqua;
+}
+
+a:hover {
+  color: brown;
+}
+a:visited {
+  color: chartreuse;
+}
+a:active {
+  color: cornsilk;
+}

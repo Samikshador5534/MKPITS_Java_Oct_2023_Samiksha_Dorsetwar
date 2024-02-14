@@ -1,0 +1,10 @@
+#maindiv p {
+  color: rgb(92, 199, 163);
+  font-style: italic;
+}
+p {
+  color: blue;
+}
+h2 {
+  font-style: italic;
+}

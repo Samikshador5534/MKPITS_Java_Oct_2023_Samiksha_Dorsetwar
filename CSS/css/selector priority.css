@@ -1,0 +1,10 @@
+#maindiv p {
+  color: blue;
+}
+#maindiv .s1 {
+  color: chartreuse;
+  font-style: italic;
+}
+p {
+  color: coral;
+}

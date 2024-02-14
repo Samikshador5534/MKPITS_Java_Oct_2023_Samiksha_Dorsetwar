@@ -1,0 +1,19 @@
+.container {
+  background-color: rgb(23, 38, 33);
+  color: rgb(229, 233, 211);
+  text-align: right;
+  padding: 3px;
+}
+.container > div {
+  display: inline-block;
+  padding: 3px;
+}
+
+img {
+  float: inline-end;
+  width: 40px;
+  height: 20px;
+}
+.im {
+  float: inline-start;
+}
