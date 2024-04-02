@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoM</title>
+  </head>
+  <body>
+    <div id="mydiv">
+      <h1>hello everyone good morning</h1>
+    </div>
+    <p></p>
+    <script>
+      //creating a new h2 element
+
+      var nENode = document.createElement("h2");
+      console.log(nENode);
+
+      var targetNode = document.getElementById("mydiv");
+      targetNode.appendChild(nENode);
+
+      
+      console.log(targetNode);
+
+
+    //   var targetNode = document.getElementById("myid");
+
+    //         // Creating and Appending New Element h2
+	// 		targetNode.appendChild(document.createElement("h2"));
+
+    //         console.log(targetNode);

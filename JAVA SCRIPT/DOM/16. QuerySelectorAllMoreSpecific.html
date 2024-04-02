@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title class="javascript">DOM</title>
+  </head>
+  <body>
+    <h1>We are Learning JS</h1>
+    <h1 class="javascript myclass">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt.
+    </h1>
+    <h2>Now</h2>
+    <p class="javascript">
+      Hello <span>Lorem, ipsum.</span> <em>World</em><span>Youtube</span>
+    </p>
+    <p class="myclass">
+      <span>Bye</span> Lorem ipsum dolor sit amet consectetur.
+    </p>
+    <div id="show">
+      <p>1st p inside div</p>
+      <p class="javascript">
+        2nd p <span class="myspan">inside</span> <em>div</em>
+      </p>
+    </div>
+    <p id="show1">I am <em class="samiksha">Hi</em> Paragraph</p>
+    <div id="show2">I am Something Div</div>
+    <script>
+      // more specific
+      // let data = document.getElementById("show");
+      // let result = document.querySelectorAll("span.myspan");
+      // document.write(result);
+      // console.log(result);
+
+      // let result = document.getElementById("show1").querySelectorAll("em.ssamiksha");
+      // document.write(result);
+      // console.log(result);
+
+      // let result = document.querySelectorAll("#show > .technocrats > span.myspan");
+      //   let result = document.querySelectorAll("#show1  > em.samiksha");
+      //   document.write(result);
+      //   console.log(result);
+
+      let result = document
+        .getElementById("show")
+        .querySelectorAll("p, span, em");
+      document.write(result);
+      console.log(result);
+    </script>
+  </body>
+</html>

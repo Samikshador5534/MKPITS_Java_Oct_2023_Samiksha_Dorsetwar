@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>javascript</title>
+  </head>
+  <body>
+    <h1>session storage</h1>
+    <script>
+      console.log(sessionStorage);
+      sessionStorage.setItem("name", "Mkpits");
+      sessionStorage.setItem("email", "Mkpits@com");
+      console.log(sessionStorage.getItem("name"));
+      console.log(sessionStorage.key(0));
+      console.log(sessionStorage.length);
+
+      // remove item
+      sessionStorage.removeItem("email");
+      //clear all data in the session Storage
+      sessionStorage.clear();
+    </script>
+  </body>
+</html>

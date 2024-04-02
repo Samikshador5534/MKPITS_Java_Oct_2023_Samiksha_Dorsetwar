@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>dom</title>
+  </head>
+  <body>
+    <div>
+      <h1>JavaScript</h1>
+      <ul id="myjs">
+        <li>Jquery</li>
+        <li id="myang">Angular JS</li>
+        <li>React JS</li>
+        <li id="myd3">D3 JS</li>
+      </ul>
+    </div>
+    <script>
+      // parentNode.insertBefore(newNode, referenceNode)
+      // When insert New Element
+      // Accessing Parent Node
+      var parentNode = document.getElementById("myjs");
+      // Creating New li Element
+      var newNode = document.createElement("li");
+
+      // Adding text using textContent
+      newNode.textContent = "Backbone JS";
+      // Accessing Reference Node
+      var refNode = document.getElementById("myang");
+
+      // Insert New Element
+      parentNode.insertBefore(newNode, refNode);
+      console.log(parentNode);
+
+      /*
+            // When insert existing element 
+            var refNode = document.getElementById("myang");
+            var moveNode = document.getElementById("myd3");
+            document.getElementById("myul").insertBefore(moveNode, refNode);
+*/
+    </script>
+  </body>
+</html>

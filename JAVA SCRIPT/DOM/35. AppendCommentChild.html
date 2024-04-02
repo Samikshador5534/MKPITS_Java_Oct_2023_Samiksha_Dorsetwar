@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document Object Management</title>
+  </head>
+  <body>
+    <div id="mydiv">
+      <h1>hello everyone good morning</h1>
+      <h1>I am h1</h1>
+    </div>
+    <script>
+      // Creating New Comment Node
+      var nCNode = document.createComment("Comment from Javascript");
+
+      var targetNode = document.getElementById("mydiv");
+
+      // Append New Comment Node to div
+      targetNode.appendChild(nCNode);
+
+      console.log(targetNode);
+      /*
+            var targetNode = document.getElementById("myid");
+
+            // Creating and Append New Comment
+            targetNode.appendChild(document.createComment("Comment from JavaScript"));
+
+            console.log(targetNode);
+*/
+    </script>
+  </body>
+</html>

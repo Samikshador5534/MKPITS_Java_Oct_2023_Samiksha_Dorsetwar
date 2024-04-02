@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document Object Management</title>
+  </head>
+  <body>
+    <ul id="myid">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+      <li>Item 4</li>
+    </ul>
+    <div id="mydiv"></div>
+    <script>
+      // targetNode.cloneNode(deep) where deep = true | false
+      var u = document.getElementById("myid");
+      var duplicateNode = u.cloneNode(true);
+      var div = document.getElementById("mydiv");
+      div.appendChild(duplicateNode);
+      console.log(document.body);
+    </script>
+  </body>
+</html>

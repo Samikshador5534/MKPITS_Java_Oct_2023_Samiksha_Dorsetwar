@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM</title>
+  </head>
+  <body>
+    <h1 id="hello">
+      <!-- This is Comment -->
+      Good morning everybody
+    </h1>
+    <p id="hello1">I am Paragraph</p>
+    <p id="hello2"><span>I am an span</span> I am Paragraph</p>
+    <script>
+      //   let result = document.getElementById("hello");
+      // It includes text node, comment node and any whitespace - space, tab, enter etc
+      //   console.log(result.firstChild.nextSibling);
+      //   console.log(result.childNodes);
+      // It ignores text node, comment node and any whitespace
+      //   console.log(result.children);
+
+      //   let result1 = document.getElementById("hello1");
+      // It includes text node, comment node and any whitespace - space, tab, enter etc
+      //   console.log(result1.childNodes);
+      // It ignores text node, comment node and any whitespace
+      //   console.log(result1.children);
+
+      let result2 = document.getElementById("hello2");
+      // It includes text node, comment node and any whitespace - space, tab, enter etc
+      console.log(result2.childNodes);
+      //   output - text / 2;
+      // It ignores text node, comment node and any whitespace
+      console.log(result2.children);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document Object Management</title>
+  </head>
+  <body>
+    <div id="mydiv">
+      <h2 id="myh2">Lorem ipsum dolor sit.</h2>
+      <h3 id="myh3">Lorem ipsum dolor sit.</h3>
+      <h1 id="myh1">Lorem ipsum dolor sit.</h1>
+    </div>
+
+    <script>
+      // targetElement.insertAdjacentElement("position", element)
+      // position : 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend'
+      var parentNode = document.getElementById("mydiv");
+      var h = document.getElementById("myh2");
+      var newElement = document.createElement("span");
+      newElement.textContent = "This is span";
+      h.insertAdjacentElement("beforebegin", newElement);
+      h.insertAdjacentElement("afterend", newElement);
+      h.insertAdjacentElement("afterbegin", newElement);
+      h.insertAdjacentElement("beforeend", newElement);
+      console.log(parentNode);
+    </script>
+  </body>
+</html>

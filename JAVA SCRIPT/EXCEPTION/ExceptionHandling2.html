@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exception</title>
+  </head>
+  <body>
+    <h1>Exception Handling</h1>
+    <script>
+      function getRectArea(w, h) {
+        if (isNan(w) || isNaN(h)) {
+          throw "parameter is not number";
+        }
+      }
+      try {
+        getRectArea(15, "a");
+      } catch (e) {
+        document.write(e);
+      }
+      document.write("<br/> I  am out of now");
+    </script>
+  </body>
+</html>
