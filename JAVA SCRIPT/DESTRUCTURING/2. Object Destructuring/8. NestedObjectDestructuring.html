@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Technocrats Solutions</title>
+    <title>Solutions</title>
+    <script src="8. NestedObjectDestructuring.js"></script>
   </head>
   <body>
     <script>
@@ -14,14 +15,14 @@
         tutor: "Technocrats Solutions",
         student: {
           stu1: "Rahul",
-          stu2: "Sonam"
-        }
+          stu2: "Sonam",
+        },
       };
       var {
         courseName,
         duration,
         tutor,
-        student: { stu1, stu2 }
+        student: { stu1, stu2 },
       } = course;
       console.log(courseName);
       console.log(duration);
