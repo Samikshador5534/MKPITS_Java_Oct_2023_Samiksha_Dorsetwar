@@ -23,16 +23,16 @@
 <tbody>
 <tr>
 <td><label>First Name:</label></td>
-<td><input type="text" name="firstName" /></td>
+<td><input type="text" name="firstName" required/></td>
 
 <tr>
 <td><label>Last Name:</label></td>
-<td><input type="text" name="lastName" /></td>
+<td><input type="text" name="lastName"  required/></td>
 </tr>
 
 <tr>
 <td><label>Email:</label></td>
-<td><input type="text" name="email" /></td>
+<td><input type="text" name="email" required/></td>
 </tr>
 
 <tr>
