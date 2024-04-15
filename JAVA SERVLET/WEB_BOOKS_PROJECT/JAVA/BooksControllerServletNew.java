@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+
 /**
  * Servlet implementation class StudentControllerServlet
  */
@@ -51,7 +52,7 @@ public class BooksControllerServletNew extends HttpServlet {
 	}
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException, ServletException {
 
 
 		try {
@@ -74,15 +75,84 @@ public class BooksControllerServletNew extends HttpServlet {
 			case "ADD" :
 				addbooks(request ,response);
 				break;
+			case "LOAD":
+				loadBooks(request, response);
+				break;
+			case "UPDATE":
+				updateBooks(request, response);
+				break;
+			case "DELETE":
+				deleteBooks(request, response);
+				break;
 				default:
 					listBooks(request, response);
 			}
 			listBooks(request , response);
 		} catch (Exception e) {
-			throw new ServletException();
+			throw new ServletException(e);
 		}
 	}
 	
+	private void deleteBooks(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		// read books id from form data
+		String booksId = request.getParameter("booksId");
+		
+		//delete book from database
+		books_Db_Util.deleteBooks(booksId);
+		
+		//send back to again "list-books.jsp"
+		listBooks(request, response);
+	}
+		
+	
+
+
+	private void updateBooks(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// read books id from form data
+				String booksId = request.getParameter("booksId");
+				int id = Integer.parseInt(booksId);
+
+				// read student data from form
+				String title = request.getParameter("title");
+				String author = request.getParameter("author");
+				String date = request.getParameter("date");
+				String genres = request.getParameter("genres");
+				String characters = request.getParameter("characters");
+				String synopsis = request.getParameter("synopsis");
+
+				// create a new student object
+				Books_Model theBooks = new Books_Model(id, title, author, date,genres,characters,synopsis);
+
+				// perform update on deatabase
+				books_Db_Util.updateBooks(theBooks);
+
+				// send them back to the list "list-books" page
+				listBooks(request, response);
+			}
+	
+
+
+	private void loadBooks(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		// read student id from form data
+				String theBooksId = request.getParameter("booksId");
+
+				// get student from database (db.....utility)
+				Books_Model theBooks = books_Db_Util.loadBooks(theBooksId);
+
+				// place student in the request attribute
+				request.setAttribute("THE_BOOKS", theBooks);
+
+				// send to JSP page view
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/update_list-book-form.jsp");
+				dispatcher.forward(request, response);
+
+			}
+
+		
+	
+
+
 	//This method handles adding a new student to the database based on the form data sent via the request.
 	private void addbooks(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//read student data from form
@@ -98,7 +168,7 @@ public class BooksControllerServletNew extends HttpServlet {
 		Books_Model theBooks = new Books_Model( title, author, date, genres,characters, synopsis);
 		
 		//add student to the database
-		books_Db_Util.addbooks(theBooks);//The new student is added to the database using the addStudent() method of the student_Db_Util object.
+		books_Db_Util.addbooks(theBooks);//The new books is added to the database using the addbooks() method of the books_Db_Util object.
 
 //java
 		
@@ -109,15 +179,15 @@ public class BooksControllerServletNew extends HttpServlet {
 
 	private void listBooks (HttpServletRequest request , HttpServletResponse response) throws Exception{
 		 //get student from db....util
-		//It fetches the list of students from the database using the getStudents() method of the student_Db_Util object.
+		//It fetches the list of BOOKS from the database using the getbooks() method of the books_Db_Util object.
 		List<Books_Model> books = books_Db_Util.getBooks();
 		
-		//add student to the request
-		//The list of students is set as an attribute in the request object with the name "STUDENT_LIST".
-		request.setAttribute("STUDENT_LIST", books);
+		//add books to the request
+		//The list of books is set as an attribute in the request object with the name "BOOKS_LIST".
+		request.setAttribute("BOOKS_LIST", books);
 		
 		//send to jsp pages
-		//The request is then forwarded to the JSP page named "list_student-button.jsp", where the list of students will be displayed.
+		//The request is then forwarded to the JSP page named "list_books-button.jsp", where the list of books will be displayed.
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-books-button.jsp");
 		dispatcher.forward(request, response);

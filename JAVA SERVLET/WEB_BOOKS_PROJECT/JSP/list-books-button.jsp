@@ -9,9 +9,9 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
  <link type="text/css" rel="stylesheet" href="css/style.css"> 
-<link type="text/css" rel="stylesheet" href="css/add-student-style.css"> 
+<link type="text/css" rel="stylesheet" href="css/add-books-style.css"> 
 </head>
- <% List<Books_Model> theStudents = (List<Books_Model>)request.getAttribute("STUDENT_LIST");%>
+ <% List<Books_Model> thBooks = (List<Books_Model>)request.getAttribute("BOOKS_LIST");%>
 <body>
 
 	<div id="wrapper">
@@ -33,8 +33,21 @@
 					<th>Genres</th>
 					<th>Characters</th>
 					<th>Synopsis</th>
+					<th>Action</th>
 				</tr>
-				<c:forEach var="tempBooks" items = "${STUDENT_LIST}">
+				<c:forEach var="tempBooks" items = "${BOOKS_LIST}">
+				
+				<!-- Set up a link link for each Books -->
+				<c:url var="tempLink" value="BooksControllerServletNew">
+				<c:param name="command" value="LOAD"/>
+				<c:param name="booksId" value="${tempBooks.id}"/>
+				</c:url>
+				
+				<!-- Set up a link to delete books -->
+				<c:url var="deleteLink" value="BooksControllerServletNew">
+				<c:param name="command" value="DELETE"/>
+				<c:param name="booksId" value="${tempBooks.id}"/>
+				</c:url>
 				
 				<tr>
 				    <td>${tempBooks.id}</td>
@@ -44,6 +57,11 @@
 					<td>${tempBooks.genres}</td>
 					<td>${tempBooks.characters}</td>
 					<td>${tempBooks.synopsis}</td>
+					<td><a href="${tempLink}">Update</a>
+						|
+						<a href="${deleteLink}" onclick="if(!(confirm('Are you sure you want to delete this books ?'))) return false">Delete</a>
+						
+						</td>
 				</tr> 
 				</c:forEach>
 			</table>

@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 
 
+
 public class Books_Db_Utility {
 
 	private DataSource datasource;
@@ -113,6 +114,116 @@ public class Books_Db_Utility {
 	    	Close(myConn,myStmt,null);
 	    }
 }
+	public Books_Model loadBooks(String theBooksId) {
+		Books_Model theBooks = null;
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		int booksId;
 
+		try {
+			// convert student id into integer
+			booksId = Integer.parseInt(theBooksId);
+
+			// get database connection
+			myConn = datasource.getConnection();
+
+			// create sql to get selected student
+			String sql = "select * from books where id = ?";
+
+			// create a prepared statement
+			myStmt = myConn.prepareStatement(sql);
+
+			// set params
+			myStmt.setInt(1, booksId);
+
+			// execute statement
+			myRs = myStmt.executeQuery();
+
+			// retrive data from result set row
+			if (myRs.next()) {
+				String title = myRs.getString("title");
+				String author = myRs.getString("author");
+				String date = myRs.getString("date");
+				String genres = myRs.getString("genres");
+				String characters = myRs.getString("characters");
+				String synopsis = myRs.getString("synopsis");
+
+				// use the studentid during constrction
+				theBooks = new Books_Model(booksId, title, author, date, genres, characters, synopsis);
+			} else {
+				throw new Exception("Could not find booksid " + booksId);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Close(myConn, myStmt, myRs);
+		}
+
+		return theBooks;
+	}
 	
+
+
+public void updateBooks(Books_Model theBooks) throws Exception {
+
+	Connection myConn = null;
+	PreparedStatement myStmt = null;
+	try {
+
+		// get db connection
+
+		myConn = datasource.getConnection();
+
+		// create sql to get update student
+		String sql = "update books set title = ?,author = ?,date = ? ,genres = ? ,characters = ? ,synopsis = ?  where id = ?";
+
+		// create a prepared statement
+		myStmt = myConn.prepareStatement(sql);
+
+		// set params
+		
+		myStmt.setString(1, theBooks.getTitle());   		
+		myStmt.setString(2, theBooks.getAuthor());
+		myStmt.setString(3, theBooks.getDate());
+		myStmt.setString(4, theBooks.getGenres());
+		myStmt.setString(5, theBooks.getCharacters());
+		myStmt.setString(6, theBooks.getSynopsis());
+		myStmt.setInt(7, theBooks.getId());
+
+		// execute SQL statement
+		myStmt.execute();
+
+	} finally {
+		Close(myConn, myStmt, null);
+	}
+
+}
+public void deleteBooks(String booksId) throws Exception {
+	Connection myConn = null;
+	PreparedStatement myStmt = null;
+	try {
+		// convert student to integer
+		int theBooksId = Integer.parseInt(booksId);
+
+		// get db connection
+
+		myConn = datasource.getConnection();
+
+		// create sql to get update student
+		String sql = "delete from books where id = ?";
+
+		// create a prepared statement
+		myStmt = myConn.prepareStatement(sql);
+		
+		//set params
+		myStmt.setInt(1, theBooksId);
+		
+		//execute sql
+		myStmt.execute();
+	} finally {
+		Close(myConn, myStmt, null);
+	}
+
+}
 }
