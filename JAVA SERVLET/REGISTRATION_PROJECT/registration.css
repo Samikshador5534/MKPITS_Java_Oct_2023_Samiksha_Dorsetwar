@@ -1,0 +1,69 @@
+@charset "ISO-8859-1";
+
+
+body {
+  font-family: Arial, sans-serif; 
+  margin: 0; 
+  padding: 0; 
+  background-image: url(image/img.jpg);
+}
+
+.container {
+  width: 400px; /* Set a width for the form container */
+  margin: 50px auto; /* Center the form horizontally */
+  padding: 30px; /* Add some padding inside the container */
+  border: 3px solid rgb(128, 0, 64); /* Add a thin border */
+  border-radius: 7px; /* Add rounded corners for a nicer look */
+  background-color: rgb(255, 255, 255);
+}
+
+#name{
+	color: chartreuse;
+}
+
+h1 {
+  text-align: center; /* Center the form title */
+  margin-bottom: 20px; /* Add some space below the title */
+  color: chartreuse;
+}
+
+/* Form styles */
+form {
+  display: flex; /* Arrange form elements in a row */
+  flex-wrap: wrap; /* Allow elements to wrap to the next line on smaller screens */
+}
+
+label {
+  width: 100px; /* Set a fixed width for labels */
+  margin-bottom: 5px; /* Add some space below labels */
+  text-align: right; /* Align labels to the right */
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 250px; /* Set a width for input fields */
+  padding: 10px; /* Add some padding for readability */
+  border: 1px solid #ccc; /* Add a thin border */
+  border-radius: 3px; /* Add rounded corners */
+  margin-bottom: 15px; /* Add some space below input fields */
+
+
+}
+
+/* Link styles */
+a {
+  color: rgb(255, 255, 255); /* Set link color */
+  text-decoration: none; /* Remove underline from links */
+  font-weight: bold; /* Make link text bold */
+  padding: 10px 20px; /* Add some padding for the link */
+  display: inline-block; /* Display link as a block element */
+  background-color: rgb(0, 255, 0); /* Set background color for link */
+  border-radius: 5px; /* Add rounded corners */
+  margin-top: 20px; /* Add space above the link */
+  transition: background-color 0.2s ease-in-out; /* Add a smooth hover effect */
+  
+}
+
+a:hover {
+  background-color: #ccc; 
+}

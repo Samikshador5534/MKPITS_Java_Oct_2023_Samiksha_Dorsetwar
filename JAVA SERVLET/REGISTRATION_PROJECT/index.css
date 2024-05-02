@@ -1,0 +1,50 @@
+@charset "ISO-8859-1";
+
+ body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-image: url("image/img2.jpg");
+      background-size: cover;
+    }
+    .navbar {
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      background-color: rgb(0, 0, 160);
+      padding: 20px 40px;
+      font-weight: bold;
+      
+    }
+    .navbar a {
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+      margin-right: 20px;
+    }
+    
+    /* Style the navigation links on hover */
+    .navbar a:hover {
+      background-color: rgb(255, 255, 128);
+      color: #000;
+    }
+    
+    
+    .main-content {
+      text-align: center;
+      margin-top: 150px;
+    }
+    
+    .lgn{
+	  float: right;
+      background-color: rgb(128, 128, 192);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+	}
+	
+	  /* Style the login button on hover */
+    .lgn:hover {
+      background-color: #45a049;
+    }
