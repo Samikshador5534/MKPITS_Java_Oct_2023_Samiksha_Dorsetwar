@@ -11,18 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserControllerSql {
     @Autowired
-//    UserServiceSql userServiceSql;
 
     IUserSql iUserSql;
-
-//    @RequestMapping("/sql/users")
-//    public ResponseEntity<Object> getUser() {
-//        UserDtoSql userDtoSql = userServiceSql.getUserById();
-//        return  ResponseEntity.ok(userDtoSql);
-//    }
-
-
-
 
     @RequestMapping(value = "/v1/users/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getUser(@PathVariable("id") Integer id) {

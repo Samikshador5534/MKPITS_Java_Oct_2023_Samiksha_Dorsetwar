@@ -10,6 +10,6 @@ public class MySecondController {
     @RequestMapping("/name")
     public String getName(){
 
-        return "Pranav Armarkar";
+        return "Samiksha Paidlewar";
     }
 }
