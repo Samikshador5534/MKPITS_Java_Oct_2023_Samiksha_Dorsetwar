@@ -1,6 +1,6 @@
-create database demoproject;
-USE demoproject;
-CREATE TABLE `demoproject`.`users` (
+create database demo_app;
+USE demo_app;
+CREATE TABLE `demo_app`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(10) NULL,
   `first_name` VARCHAR(20) NULL,
@@ -13,3 +13,8 @@ CREATE TABLE `demoproject`.`users` (
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE);
+
+  ALTER TABLE `demo_app`.`users`
+  DROP COLUMN `username`,
+  DROP INDEX `username_UNIQUE` ;
+  ;
