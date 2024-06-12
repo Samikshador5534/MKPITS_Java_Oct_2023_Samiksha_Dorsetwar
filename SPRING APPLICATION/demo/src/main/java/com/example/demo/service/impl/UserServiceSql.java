@@ -1,8 +1,9 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.request.UserRequestSql;
+import com.example.demo.dto.request.UserRequestDto;
 
-import com.example.demo.dto.response.UserResponseSql;
+import com.example.demo.dto.response.UserGetResponseDto;
+import com.example.demo.dto.response.UserPostResponseDto;
 import com.example.demo.mysql.model.UserCredential;
 import com.example.demo.mysql.model.UserModel;
 import com.example.demo.repository.UserCredentialRepository;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +32,10 @@ public class UserServiceSql implements IUserSql {
 
 
     @Override
-    public UserRequestSql getUserById(Integer id) {
+    public UserRequestDto getUserById(Integer id) {
 
         Optional<UserModel> userModel = userrepository.findById(id);
-        UserRequestSql userDtoSql = new UserRequestSql();
+        UserRequestDto userDtoSql = new UserRequestDto();
         if (userModel.isPresent()){
             userDtoSql = convertUserModelToUserDtoSql(userModel.get());
         }
@@ -43,34 +43,41 @@ public class UserServiceSql implements IUserSql {
     }
 
     @Override
-    public List<UserRequestSql> getAllUsers() {
+    public List<UserGetResponseDto> getAllUsers() {
 
         List<UserModel> userModelList = (List<UserModel>) userrepository.findAll();
-        List<UserRequestSql> userDtoList = new ArrayList<>();
-        for(UserModel userModel: userModelList){
-            UserRequestSql userRequestSql = convertUserModelToUserDtoSql(userModel);
-            userDtoList.add(userRequestSql);
+//        List<UserRequestSql> userDtoList = new ArrayList<>();
+//        for(UserModel userModel: userModelList){
+//            UserRequestSql userRequestSql = convertUserModelToUserDtoSql(userModel);
+//            userDtoList.add(userRequestSql);
+//        }
+        List<UserGetResponseDto> userGetResponseDtoList = new ArrayList<>();
+        for (UserModel userModel : userModelList) {
+            UserGetResponseDto userGetResponseDto = convertUserModelToUserGetResponseSql(userModel);
+            userGetResponseDtoList.add(userGetResponseDto);
         }
-        return userDtoList;
+        return userGetResponseDtoList;
     }
 
+
+
     @Override
-    public UserRequestSql updateUser(UserRequestSql userRequestSql) {
-        Optional<UserModel> userModelOptional = userrepository.findById(userRequestSql.getId());
+    public UserRequestDto updateUser(UserRequestDto userRequestDto) {
+        Optional<UserModel> userModelOptional = userrepository.findById(userRequestDto.getId());
         if(userModelOptional.isEmpty()) {
-            System.out.println("User data with id: " + userRequestSql.getId() + " not found");
+            System.out.println("User data with id: " + userRequestDto.getId() + " not found");
         } else {
-            UserModel userModel = convertUserDtoToUserModel(userRequestSql, userModelOptional.get());
-            userModel.setId(userRequestSql.getId());
+            UserModel userModel = convertUserDtoToUserModel(userRequestDto, userModelOptional.get());
+            userModel.setId(userRequestDto.getId());
             userModel = userrepository.save(userModel);
             return convertUserModelToUserDtoSql(userModel);
         }
-        return userRequestSql;
+        return userRequestDto;
     }
 
 
     @Override
-    public UserRequestSql deleteUser(Integer id) {
+    public UserRequestDto deleteUser(Integer id) {
         Optional<UserModel> userModelOptional = userrepository.findById(id);
         if (userModelOptional.isEmpty()) {
             System.out.println("User data with id: " + id + " not found");
@@ -83,19 +90,19 @@ public class UserServiceSql implements IUserSql {
     }
 
     @Override
-    public UserRequestSql updatePartialUser(UserRequestSql userRequestSql) {
-        Optional<UserModel> userModelOptional = userrepository.findById(userRequestSql.getId());
+    public UserRequestDto updatePartialUser(UserRequestDto userRequestDto) {
+        Optional<UserModel> userModelOptional = userrepository.findById(userRequestDto.getId());
         if (userModelOptional.isEmpty()) {
-            System.out.println("User data with id: " + userRequestSql.getId() + " not found");
+            System.out.println("User data with id: " + userRequestDto.getId() + " not found");
             return  null;
         } else {
             UserModel userModel = userModelOptional.get();
            // UserModel userModel = userModelOptional.get();
-            userModel.setFirstName(userRequestSql.getFirstName() != null && !userRequestSql.getFirstName().equals(userModel.getFirstName()) ? userRequestSql.getFirstName() : userModel.getFirstName());
-            userModel.setLastName(userRequestSql.getLastName() != null && !userRequestSql.getLastName().equals(userModel.getLastName()) ? userRequestSql.getLastName() : userModel.getLastName());
-            userModel.setEmail(userRequestSql.getEmail() != null && !userRequestSql.getEmail().equals(userModel.getEmail()) ? userRequestSql.getEmail() :userModel.getEmail());
-            userModel.setMobile(userRequestSql.getMobile() != null && !userRequestSql.getMobile().equals(userModel.getMobile()) ? userRequestSql.getMobile() :userModel.getMobile());
-            userModel.setMobile(((userRequestSql.getDateOfBirth() != null) && !userRequestSql.getDateOfBirth().equals(userModel.getDateOfBirth())) ? String.valueOf(userRequestSql.getDateOfBirth()) : String.valueOf(userModel.getDateOfBirth()));
+            userModel.setFirstName(userRequestDto.getFirstName() != null && !userRequestDto.getFirstName().equals(userModel.getFirstName()) ? userRequestDto.getFirstName() : userModel.getFirstName());
+            userModel.setLastName(userRequestDto.getLastName() != null && !userRequestDto.getLastName().equals(userModel.getLastName()) ? userRequestDto.getLastName() : userModel.getLastName());
+            userModel.setEmail(userRequestDto.getEmail() != null && !userRequestDto.getEmail().equals(userModel.getEmail()) ? userRequestDto.getEmail() :userModel.getEmail());
+            userModel.setMobile(userRequestDto.getMobile() != null && !userRequestDto.getMobile().equals(userModel.getMobile()) ? userRequestDto.getMobile() :userModel.getMobile());
+            userModel.setMobile(((userRequestDto.getDateOfBirth() != null) && !userRequestDto.getDateOfBirth().equals(userModel.getDateOfBirth())) ? String.valueOf(userRequestDto.getDateOfBirth()) : String.valueOf(userModel.getDateOfBirth()));
             userModel.setUpdatedBy(2);
             userModel.setUpdatedAt(LocalDateTime.now());
             userrepository.save(userModel);
@@ -106,7 +113,7 @@ public class UserServiceSql implements IUserSql {
 
     @Override
     @Transactional
-    public UserResponseSql createUser(UserRequestSql userDto) {
+    public UserPostResponseDto createUser(UserRequestDto userDto) {
 
         // Below code saves data in users table
         UserModel userModel = new UserModel();
@@ -132,32 +139,32 @@ public class UserServiceSql implements IUserSql {
         userCredential.setUpdatedAt(LocalDateTime.now());
         userCredentialRepository.save(userCredential);
         //return convertUserModelToUserDtoSql(userModel);
-        UserResponseSql userResponseSql = new UserResponseSql();
-        userResponseSql.setId(userModel.getId());
-        userResponseSql.setFirstName(userModel.getFirstName());
-        userResponseSql.setUsername(userCredential.getUsername());
-        return userResponseSql;
+        UserPostResponseDto userPostResponseDto = new UserPostResponseDto();
+        userPostResponseDto.setId(userModel.getId());
+        userPostResponseDto.setFirstName(userModel.getFirstName());
+        userPostResponseDto.setUsername(userCredential.getUsername());
+        return userPostResponseDto;
     }
 
 
-    private UserRequestSql convertUserModelToUserDtoSql(UserModel userModel) {
-//        UserRequestSql userDtoSql= new UserRequestSql();
-//        userDtoSql.setId(userModel.getId());
-//        userDtoSql.setFirstName(userModel.getFirstName());
-//        userDtoSql.setLastName(userModel.getLastName());
-//        userDtoSql.setMobile(userModel.getMobile());
-//        userDtoSql.setEmail(userModel.getEmail());
-//        return  userDtoSql;
+    private UserRequestDto convertUserModelToUserDtoSql(UserModel userModel) {
+        UserRequestDto userDtoSql= new UserRequestDto();
+        userDtoSql.setId(userModel.getId());
+        userDtoSql.setFirstName(userModel.getFirstName());
+        userDtoSql.setLastName(userModel.getLastName());
+        userDtoSql.setMobile(userModel.getMobile());
+        userDtoSql.setEmail(userModel.getEmail());
+        return  userDtoSql;
 
-        UserRequestSql userRequestSql = UserRequestSql.builder()
-                .id(userModel.getId())
-                .firstName(userModel.getFirstName())
-                .lastName(userModel.getLastName())
-                .mobile(userModel.getMobile())
-                .email(userModel.getEmail())
-                .dateOfBirth(LocalDate.from(userModel.getDateOfBirth()))
-                .build();
-        return userRequestSql ;
+//        UserRequestSql userRequestSql = UserRequestSql.builder()
+//                .id(userModel.getId())
+//                .firstName(userModel.getFirstName())
+//                .lastName(userModel.getLastName())
+//                .mobile(userModel.getMobile())
+//                .email(userModel.getEmail())
+//                .dateOfBirth(LocalDate.from(userModel.getDateOfBirth()))
+//                .build();
+//        return userRequestSql ;
 
     }
 
@@ -174,7 +181,7 @@ public class UserServiceSql implements IUserSql {
 //        userModel.setUpdatedAt(LocalDateTime.now());
 //        return userModel;
 //    }
-    private UserModel convertUserDtoToUserModel(UserRequestSql userRequestSql, UserModel userModel) {
+    private UserModel convertUserDtoToUserModel(UserRequestDto userRequestDto, UserModel userModel) {
 //        userModel.setFirstName(userRequestSql.getFirstName());
 //        userModel.setLastName(userRequestSql.getLastName());
 //        userModel.setMobile(userRequestSql.getMobile());
@@ -184,11 +191,11 @@ public class UserServiceSql implements IUserSql {
 //        return userModel;
 
         userModel = UserModel.builder()
-                .firstName(userRequestSql.getFirstName())
-                .lastName(userRequestSql.getLastName())
-                .mobile(userRequestSql.getMobile())
-                .email(userRequestSql.getEmail())
-                .dateOfBirth(userRequestSql.getDateOfBirth().atStartOfDay())
+                .firstName(userRequestDto.getFirstName())
+                .lastName(userRequestDto.getLastName())
+                .mobile(userRequestDto.getMobile())
+                .email(userRequestDto.getEmail())
+                .dateOfBirth(userRequestDto.getDateOfBirth().atStartOfDay())
                 .createdAt(LocalDateTime.now())
                 .updatedBy(1)
                 .updatedAt(LocalDateTime.now())
@@ -197,6 +204,15 @@ public class UserServiceSql implements IUserSql {
         return  userModel;
     }
 
+    private UserGetResponseDto convertUserModelToUserGetResponseSql(UserModel userModel) {
 
+        UserGetResponseDto userGetResponseDto = new UserGetResponseDto();
+        userGetResponseDto.setId(userModel.getId());
+        userGetResponseDto.setFirstName(userModel.getFirstName());
+        userGetResponseDto.setLastName(userModel.getLastName());
+        userGetResponseDto.setMobile(userModel.getMobile());
+        userGetResponseDto.setEmail(userModel.getEmail());
+        return userGetResponseDto;
+    }
 
 }

@@ -1,25 +1,26 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.request.UserRequestSql;
-import com.example.demo.dto.response.UserResponseSql;
+import com.example.demo.dto.request.UserRequestDto;
+import com.example.demo.dto.response.UserGetResponseDto;
+import com.example.demo.dto.response.UserPostResponseDto;
 
 import java.util.List;
 
 public interface IUserSql {
 //    public UserDtoSql getAllDetails();
 
-    public UserRequestSql getUserById(Integer id);
+    public UserRequestDto getUserById(Integer id);
 
-    public List<UserRequestSql>getAllUsers();
+    public List<UserGetResponseDto> getAllUsers();
 
-    public UserRequestSql updateUser(UserRequestSql userRequestSql);
+    public UserRequestDto updateUser(UserRequestDto userRequestDto);
 
     //public UserRequestSql createUser(UserRequestSql userDtoSql);
 
 
-     public UserRequestSql deleteUser(Integer id);
+     public UserRequestDto deleteUser(Integer id);
 
-    public UserRequestSql updatePartialUser(UserRequestSql userRequestSql);
+    public UserRequestDto updatePartialUser(UserRequestDto userRequestDto);
 
-    public UserResponseSql createUser(UserRequestSql userRequestDto);
+    public UserPostResponseDto createUser(UserRequestDto userRequestDto);
 }
