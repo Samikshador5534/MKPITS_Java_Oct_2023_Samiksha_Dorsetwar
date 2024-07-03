@@ -1,0 +1,96 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* Prevent body from scrolling */
+}
+
+/* Container styles */
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 600px; /* Increased width */
+    max-width: 100%;
+    text-align: center;
+    margin: 20px; /* Added margin for spacing */
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(100vh - 40px); /* Limit height to viewport minus margin */
+}
+
+/* Heading styles */
+.container h2 {
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666666;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Form group inline styles */
+.form-group-inline {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Adjust the space between the inline fields */
+}
+
+.form-group-inline .form-group {
+    flex: 1; /* Each inline field takes equal space */
+}
+
+/* Button styles */
+.form-group button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-group button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%; /* Adjusted width for smaller screens */
+    }
+}

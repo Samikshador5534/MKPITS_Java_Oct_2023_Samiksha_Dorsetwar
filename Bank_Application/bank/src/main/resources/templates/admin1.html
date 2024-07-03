@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bank Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin1.css" />
+    <style>
+        /* Additional CSS */
+        .main-content section {
+            display: none;
+        }
+        .main-content section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <h2>Bank Admin</h2>
+    <ul>
+        <li><a href="#" data-section="dashboard">Dashboard</a></li>
+        <li><a href="#" data-section="manageUsers">Users</a></li>
+        <li><a href="#" data-section="manageEmployees">Employees</a></li>
+        <li><a href="#" data-section="manageAccounts">Accounts</a></li> <!-- Added Accounts section -->
+        <li><a href="#" data-section="transactions">Transactions</a></li>
+        <li><a href="#" data-section="reports">Reports</a></li>
+        <li><a href="#" data-section="settings">Settings</a></li>
+        <li><a href="#" data-section="logout">Logout</a></li>
+    </ul>
+</div>
+<div class="main-content">
+    <header>
+        <h1>Dashboard</h1>
+        <div class="user-wrapper">
+            <img src="images/admin.jpg" width="30" height="30" alt="Admin" />
+            <div>
+                <h4>Samiksha Paidlewar</h4>
+                <h5>Gurukripa Bank</h5>
+                <small>Admin</small>
+            </div>
+        </div>
+    </header>
+
+    <section id="dashboard" class="active">
+        <div class="cards">
+            <div class="card">
+                <div class="card-content">
+                    <h3>Total Accounts</h3>
+                    <h2>1234</h2>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <h3>Total Transactions</h3>
+                    <h2>5678</h2>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <h3>Total Users</h3>
+                    <h2>910</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="recent-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Recent Accounts</h3>
+                </div>
+                <div class="card-body">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>john.doe@example.com</td>
+                            <td class="action-icons">
+                                <button onclick="editAccount(1)">
+                                    <img src="images/edit.png" alt="Edit" />
+                                </button>
+                                <button onclick="deleteAccount(2)">
+                                    <img src="images/delete.png" alt="Delete" />
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>jane.smith@example.com</td>
+                            <td class="action-icons">
+                                <button onclick="editAccount(1)">
+                                    <img src="images/edit.png" alt="Edit" />
+                                </button>
+                                <button onclick="deleteAccount(2)">
+                                    <img src="images/delete.png" alt="Delete" />
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mike Johnson</td>
+                            <td>mike.johnson@example.com</td>
+                            <td class="action-icons">
+                                <button onclick="editAccount(1)">
+                                    <img src="images/edit.png" alt="Edit" />
+                                </button>
+                                <button onclick="deleteAccount(2)">
+                                    <img src="images/delete.png" alt="Delete" />
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="customers">
+                <div class="card-header">
+                    <h3>New Customers</h3>
+                </div>
+                <div class="card-body">
+                    <div class="customer">
+                        <img src="images/customer.jpg" alt="Customer 1" />
+                        <div>
+                            <span>David Peterson</span>
+                            <small>2 Minutes Ago</small>
+                        </div>
+                    </div>
+                    <div class="customer">
+                        <img src="images/images.jpeg" alt="Customer 2" />
+                        <div>
+                            <span>Sarah Williams</span>
+                            <small>10 Minutes Ago</small>
+                        </div>
+                    </div>
+                    <div class="customer">
+                        <img src="images/customer1.jpg" alt="Customer 3" />
+                        <div>
+                            <span>Michael Brown</span>
+                            <small>30 Minutes Ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="manageUsers">
+        <h2>Manage Users</h2>
+        <button class="btn" onclick="createUser()">Create User</button>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Gender</th>
+                    <th> CIN</th>
+                    <th>DOB</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr  th:each="user :${admin1}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.firstName}+' '+${user.middleName}+' '+${user.lastName}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.mobile}"></td>
+                    <td th:text="${user.gender}"></td>
+                    <td th:text="${user.cin}"></td>
+                    <td th:text="${user.dob}"></td>
+                    <td class="action-icons" >
+<!--                        <a  href="userdetails/v1"></a>-->
+                        <button  onclick="updateUser(1)">
+                            <a   href="/userdetails/v1/${user.id}">
+
+                                <img src="images/edit.png" alt="Update" />
+                            </a>
+
+                        </button>
+                        <button onclick="deleteUser(1)">
+                            <img src="images/delete.png" alt="Delete" />
+                        </button>
+                        <button onclick="deactivateUser(1)">
+                            <img src="images/deactivate-user.png" alt="Deactivate" />
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="manageAccounts">
+        <h2>Manage Accounts</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th> ID</th>
+                    <th> UserID</th>
+                    <th>Name</th>
+                    <th>Account Type</th>
+                    <th>Account No</th>
+                    <th> Balance</th>
+                    <th> ROI</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Jane Smith</td>
+                    <td>Saving</td>
+                    <td>4567767753</td>
+                    <td>1300</td>
+                    <td>3.6</td>
+                    <td class="action-icons">
+                        <button onclick="updateAccount(1)">
+                            <img src="images/edit.png" alt="Update" />
+                        </button>
+                        <button onclick="deleteAccount(1)">
+                            <img src="images/delete.png" alt="Delete" />
+                        </button>
+                        <button onclick="deactivateAccount(1)">
+                            <img src="images/deactivate-user.png" alt="Deactivate" />
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="manageEmployees">
+        <h2>Manage Employees</h2>
+        <button class="btn" onclick="createEmployee()">Create Employee</button>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Gender</th>
+                    <th>City</th>
+
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee :${employee_management}">
+                    <td th:text="${employee.id}">1</td>
+                    <td th:text="${employee.firstName}+' '+${employee.lastName}"></td>
+                    <td th:text="${employee.email}"> </td>
+                    <td th:text="${employee.mobile}"></td>
+                    <td th:text="${employee.gender}"></td>
+                    <td th:text="${employee.city}"></td>
+                    <td class="action-icons">
+                        <button onclick="updateEmployee(1)">
+                            <img src="images/edit.png" alt="Update" />
+                        </button>
+                        <button onclick="deleteEmployee(1)">
+                            <img src="images/delete.png" alt="Delete" />
+                        </button>
+                        <button onclick="deactivateEmployee(1)">
+                            <img src="images/deactivate-user.png" alt="Deactivate" />
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="transactions">
+        <h2>Transactions</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead ID="head">
+                <tr>
+                    <th>ID</th>
+                    <th>User ID</th>
+                    <th>Account Number</th>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Created At</th>
+                    <th>Created By</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>101</td>
+                    <td>12345678901234</td>
+                    <td>Deposit</td>
+                    <td>1500.00</td>
+                    <td>2023-06-28</td>
+                    <td>2023-06-28 14:23:00</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>102</td>
+                    <td>23456789012345</td>
+                    <td>Withdrawal</td>
+                    <td>500.00</td>
+                    <td>2023-06-29</td>
+                    <td>2023-06-29 10:00:00</td>
+                    <td>Admin</td>
+                </tr>
+                <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="reports">
+        <h2>Reports</h2>
+        <div class="reports-container">
+            <div class="report">
+                <h3>Account Summary</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Total Accounts</th>
+                        <th>Active Accounts</th>
+                        <th>Inactive Accounts</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1234</td>
+                        <td>1000</td>
+                        <td>234</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="report">
+                <h3>Transaction History</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Total Transactions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>5678</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="report">
+                <h3>User Statistics</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Total Users</th>
+                        <th>Active Users</th>
+                        <th>Inactive Users</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>910</td>
+                        <td>800</td>
+                        <td>110</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="settings">
+        <h2>Settings</h2>
+        <div>
+            <label for="bankName">Bank Name:</label>
+            <input type="text" id="bankName">
+            <button onclick="updateBankName()">Update Bank Name</button>
+        </div>
+        <!-- Add more settings as needed -->
+    </section>
+
+
+    <section id="logout">
+        <h2>Logout</h2>
+    </section>
+</div>
+
+<script>
+    document.querySelectorAll('.sidebar a').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const sectionId = this.getAttribute('data-section');
+            document.querySelectorAll('.main-content section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        });
+    });
+
+
+
+    function deleteUser(userId) {
+        alert(`Delete user with ID: ${userId}`);
+    }
+
+    function deactivateUser(userId) {
+        alert(`Deactivate user with ID: ${userId}`);
+    }
+
+    function updateAccount(accountId) {
+        alert(`Update account with ID: ${accountId}`);
+    }
+
+    function deleteAccount(accountId) {
+        alert(`Delete account with ID: ${accountId}`);
+    }
+
+    function deactivateAccount(accountId) {
+        alert(`Deactivate account with ID: ${accountId}`);
+    }
+
+    function updateEmployee(employeeId) {
+        alert(`Update employee with ID: ${employeeId}`);
+    }
+
+    function deleteEmployee(employeeId) {
+        alert(`Delete employee with ID: ${employeeId}`);
+    }
+
+    function deactivateEmployee(employeeId) {
+        alert(`Deactivate employee with ID: ${employeeId}`);
+    }
+
+
+       var userId =2; // Replace with the actual user ID dynamically
+    document.getElementById('users').href = '/userdetails/v1/' + userId;
+
+</script>
+</body>
+</html>

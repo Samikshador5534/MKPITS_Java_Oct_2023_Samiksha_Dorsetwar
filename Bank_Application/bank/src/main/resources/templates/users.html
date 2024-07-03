@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Users</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <section id="manageUsers">
+        <h2>Manage Users</h2>
+        <a href="#" th:href="@{/createUser}" class="btn btn-primary mb-2">Create User</a>
+        <div class="table-wrapper">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Iterate over users and display data -->
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}">1</td>
+                    <td th:text="${user.username}">John Doe</td>
+                    <td th:text="${user.email}">john.doe@example.com</td>
+                    <td th:text="${user.mobile}">4584584958</td>
+                    <td>
+                        <!-- Action buttons (edit and delete) -->
+                        <a th:href="@{'/editUser/' + ${user.id}}" class="btn btn-info btn-sm">Edit</a>
+                        <a th:href="@{'/deleteUser/' + ${user.id}}" class="btn btn-danger btn-sm">Delete</a>
+                        <!-- Add more actions as needed -->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+</body>
+</html>

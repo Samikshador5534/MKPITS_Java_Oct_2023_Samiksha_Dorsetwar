@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>admin</title>
+    <link href="css/admin.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <div class="logo">Admin Dashboard</div>
+        <ul>
+            <li><a href="#manage-users">Manage Users</a></li>
+            <li><a href="#manage-employees">Manage Employees</a></li>
+            <li><a href="#audit-logs">Audit Logs</a></li>
+            <li><a href="#reports">Reports</a></li>
+            <li><a href="#settings">Settings</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div id="manage-users" class="section">
+            <h2>Manage Users</h2>
+            <button>Create User</button>
+            <button>Update User</button>
+            <button>Delete User</button>
+            <button>Deactivate User</button>
+            <table>
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>samiksha paidlewar</td>
+                    <td>paidlewarsamiksha@gmail.com</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td>ashik tembare</td>
+                    <td>ahik123@gmail.com</td>
+                    <td>Inactive</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="manage-employees" class="section">
+            <h2>Manage Employees</h2>
+            <button>Create Employee</button>
+            <button>Update Employee</button>
+            <button>Delete Employee</button>
+            <table>
+                <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Position</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>samiksha patil</td>
+                    <td>Manager</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td>raj warohkar</td>
+                    <td>Developer</td>
+                    <td>Inactive</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="audit-logs" class="section">
+            <h2>Audit Logs</h2>
+            <div class="log-buttons">
+                <button onclick="showLogs('user')">User Logs</button>
+                <button onclick="showLogs('employee')">Employee Logs</button>
+            </div>
+            <table id="userLogs" class="audit-table active">
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Username</th>
+                    <th>Action</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>User</td>
+                    <td>samiksha paidlewar</td>
+                    <td>Login</td>
+                    <td>2024-06-24 08:00</td>
+                </tr>
+                <tr>
+                    <td>User</td>
+                    <td>vaibhav paidlewar</td>
+                    <td>Logout</td>
+                    <td>2024-06-24 10:00</td>
+                </tr>
+                </tbody>
+            </table>
+            <table id="employeeLogs" class="audit-table hidden">
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Employee Name</th>
+                    <th>Action</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Employee</td>
+                    <td>pranav armarkar</td>
+                    <td>Login</td>
+                    <td>2024-06-24 09:00</td>
+                </tr>
+                <tr>
+                    <td>Employee</td>
+                    <td>harsh gupta</td>
+                    <td>Logout</td>
+                    <td>2024-06-24 11:00</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="reports" class="section">
+            <h2>Reports</h2>
+            <button>Generate Financial Report</button>
+            <button>Generate Operational Report</button>
+           
+
+        </div>
+        <div id="settings" class="section">
+            <h2>Settings</h2>
+            <button>Update Application Settings</button>
+            <button>Update Security Settings</button>
+            <button>Manage Access Control</button>
+        </div>
+    </div>
+</div>
+<script src="js/admin.js"></script>
+
+
+</body>
+</html>
