@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bank Admin Dashboard</title>
-    <link rel="stylesheet" href="css/admin1.css" />
+    <link rel="stylesheet" href="/css/admin1.css" />
     <style>
         /* Additional CSS */
         .main-content section {
@@ -35,7 +35,7 @@
     <header>
         <h1>Dashboard</h1>
         <div class="user-wrapper">
-            <img src="images/admin.jpg" width="30" height="30" alt="Admin" />
+            <img src="/images/admin.jpg" width="30" height="30" alt="Admin" />
             <div>
                 <h4>Samiksha Paidlewar</h4>
                 <h5>Gurukripa Bank</h5>
@@ -86,10 +86,10 @@
                             <td>john.doe@example.com</td>
                             <td class="action-icons">
                                 <button onclick="editAccount(1)">
-                                    <img src="images/edit.png" alt="Edit" />
+                                    <img src="/images/edit.png" alt="Edit" />
                                 </button>
                                 <button onclick="deleteAccount(2)">
-                                    <img src="images/delete.png" alt="Delete" />
+                                    <img src="/images/delete.png" alt="Delete" />
                                 </button>
                             </td>
                         </tr>
@@ -98,10 +98,10 @@
                             <td>jane.smith@example.com</td>
                             <td class="action-icons">
                                 <button onclick="editAccount(1)">
-                                    <img src="images/edit.png" alt="Edit" />
+                                    <img src="/images/edit.png" alt="Edit" />
                                 </button>
                                 <button onclick="deleteAccount(2)">
-                                    <img src="images/delete.png" alt="Delete" />
+                                    <img src="/images/delete.png" alt="Delete" />
                                 </button>
                             </td>
                         </tr>
@@ -110,10 +110,10 @@
                             <td>mike.johnson@example.com</td>
                             <td class="action-icons">
                                 <button onclick="editAccount(1)">
-                                    <img src="images/edit.png" alt="Edit" />
+                                    <img src="/images/edit.png" alt="Edit" />
                                 </button>
                                 <button onclick="deleteAccount(2)">
-                                    <img src="images/delete.png" alt="Delete" />
+                                    <img src="/images/delete.png" alt="Delete" />
                                 </button>
                             </td>
                         </tr>
@@ -128,21 +128,21 @@
                 </div>
                 <div class="card-body">
                     <div class="customer">
-                        <img src="images/customer.jpg" alt="Customer 1" />
+                        <img src="/images/customer.jpg" alt="Customer 1" />
                         <div>
                             <span>David Peterson</span>
                             <small>2 Minutes Ago</small>
                         </div>
                     </div>
                     <div class="customer">
-                        <img src="images/images.jpeg" alt="Customer 2" />
+                        <img src="/images/images.jpeg" alt="Customer 2" />
                         <div>
                             <span>Sarah Williams</span>
                             <small>10 Minutes Ago</small>
                         </div>
                     </div>
                     <div class="customer">
-                        <img src="images/customer1.jpg" alt="Customer 3" />
+                        <img src="/images/customer1.jpg" alt="Customer 3" />
                         <div>
                             <span>Michael Brown</span>
                             <small>30 Minutes Ago</small>
@@ -155,7 +155,9 @@
 
     <section id="manageUsers">
         <h2>Manage Users</h2>
-        <button class="btn" onclick="createUser()">Create User</button>
+         <button class="btn" onclick="createUser()">
+             <a href="/register">
+            Create User </a></button>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -173,7 +175,7 @@
                 <tbody>
                 <tr  th:each="user :${admin1}">
                     <td th:text="${user.id}"></td>
-                    <td th:text="${user.firstName}+' '+${user.middleName}+' '+${user.lastName}"></td>
+                    <td th:text="${user.firstName}+' '+${user.lastName}"></td>
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.mobile}"></td>
                     <td th:text="${user.gender}"></td>
@@ -182,18 +184,18 @@
                     <td class="action-icons" >
 <!--                        <a  href="userdetails/v1"></a>-->
                         <button  onclick="updateUser(1)">
-                            <a   href="/userdetails/v1/${user.id}">
+                            <a th:href="'/userdetails/v1/' + ${user.id}">
 
-                                <img src="images/edit.png" alt="Update" />
+                                <img src="/images/edit.png" alt="Update" />
                             </a>
 
                         </button>
                         <button onclick="deleteUser(1)">
-                            <img src="images/delete.png" alt="Delete" />
+                            <img src="/images/delete.png" alt="Delete" />
                         </button>
-                        <button onclick="deactivateUser(1)">
-                            <img src="images/deactivate-user.png" alt="Deactivate" />
-                        </button>
+<!--                        <button onclick="deactivateUser(1)">-->
+<!--                            <img src="/images/deactivate-user.png" alt="Deactivate" />-->
+<!--                        </button>-->
                     </td>
                 </tr>
                 </tbody>
@@ -228,13 +230,13 @@
                     <td>3.6</td>
                     <td class="action-icons">
                         <button onclick="updateAccount(1)">
-                            <img src="images/edit.png" alt="Update" />
+                            <img src="/images/edit.png" alt="Update" />
                         </button>
                         <button onclick="deleteAccount(1)">
-                            <img src="images/delete.png" alt="Delete" />
+                            <img src="/images/delete.png" alt="Delete" />
                         </button>
                         <button onclick="deactivateAccount(1)">
-                            <img src="images/deactivate-user.png" alt="Deactivate" />
+                            <img src="/images/deactivate-user.png" alt="Deactivate" />
                         </button>
                     </td>
                 </tr>
@@ -270,13 +272,13 @@
                     <td th:text="${employee.city}"></td>
                     <td class="action-icons">
                         <button onclick="updateEmployee(1)">
-                            <img src="images/edit.png" alt="Update" />
+                            <img src="/images/edit.png" alt="Update" />
                         </button>
                         <button onclick="deleteEmployee(1)">
-                            <img src="images/delete.png" alt="Delete" />
+                            <img src="/images/delete.png" alt="Delete" />
                         </button>
                         <button onclick="deactivateEmployee(1)">
-                            <img src="images/deactivate-user.png" alt="Deactivate" />
+                            <img src="/images/deactivate-user.png" alt="Deactivate" />
                         </button>
                     </td>
                 </tr>

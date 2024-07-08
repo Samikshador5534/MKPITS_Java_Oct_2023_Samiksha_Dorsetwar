@@ -1,81 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Customer Details</title>
-    <link rel="stylesheet" href="userdetails.css" />
+    <title>User Details</title>
+    <link rel="stylesheet" href="/css/userdeatils.css" />
 </head>
 <body>
-<div class="container">
-    <h1>Customer Details</h1>
-    <div class="customer-info">
+<div class="main-content">
+    <h1>User Details</h1>
+    <div class="user-info">
         <h2>Personal Information</h2>
-        <p><strong>ID:</strong> C12345</p>
-        <p><strong>First Name:</strong> John</p>
-        <p><strong>Last Name:</strong> Doe</p>
-        <p><strong>Gender:</strong> Male</p>
-        <p><strong>Email:</strong> johndoe@example.com</p>
-        <p><strong>Mobile No:</strong> +1234567890</p>
+        <p><strong>ID:</strong> <span th:text="${admin1.id}"></span></p>
+        <p>
+            <strong>First Name:</strong>
+            <span th:text="${admin1.firstName}"></span>
+        </p>
+        <p>
+            <strong>Last Name:</strong> <span th:text="${admin1.lastName}"></span>
+        </p>
+        <p><strong>Gender:</strong> <span th:text="${admin1.gender}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${admin1.email}"></span></p>
+        <p>
+            <strong>Mobile No:</strong> <span th:text="${admin1.mobile}"></span>
+        </p>
     </div>
     <div class="account-info">
         <h2>Account Information</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Account No</th>
-                <th>Type</th>
-                <th>Balance</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>123456789</td>
-                <td>Savings</td>
-                <td>$10,000</td>
-            </tr>
-            <tr>
-                <td>987654321</td>
-                <td>Checking</td>
-                <td>$5,000</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="transaction-info">
-        <h2>Recent Transactions</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Type</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>2024-07-01</td>
-                <td>Deposit</td>
-                <td>$500</td>
-                <td>Credit</td>
-            </tr>
-            <tr>
-                <td>2024-06-30</td>
-                <td>Withdrawal</td>
-                <td>$200</td>
-                <td>Debit</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="contact-info">
-        <h2>Contact Information</h2>
-        <p><strong>Address:</strong> 123 Main St, Anytown, AN 12345</p>
-        <p><strong>City:</strong> Anytown</p>
-        <p><strong>District:</strong> AnyDistrict</p>
-        <p><strong>State:</strong> AnyState</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>Account No</th>
+                    <th>account_Type</th>
+                    <th>Balance</th>
+                    <th>opening</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="account : ${accounts}">
+                    <td th:text="${account.accountNo}"></td>
+                    <td th:text="${account.account_type}"></td>
+                    <td th:text="${account.balance}"></td>
+                    <td th:text="${account.opening}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>
 </html>
+

@@ -21,4 +21,7 @@ public class UserResponseDto {
     private String adharNo;
     private String cin;
     private LocalDate dob;
+    private String address;
+    private String pincode;
+    private String account_type;
 }

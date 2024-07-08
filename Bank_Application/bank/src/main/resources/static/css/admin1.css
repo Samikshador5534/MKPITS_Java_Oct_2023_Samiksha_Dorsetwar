@@ -188,16 +188,34 @@ h2 {
 }
 
 .btn {
-  background: #4b5563;
-  color: #fff;
+   background-color: blue;
+    color:white;
   padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+  border: solid;
   cursor: pointer;
+  font-size:20px;
+
+}
+
+.btn a:link{
+  color: white;
+
+}
+
+.btn a:hover{
+  color: white;
+  text-decoration: none;
+}
+
+.btn a{
+    color: white
+font-size:20px;
+  text-decoration: none;
 }
 
 .btn:hover {
-  background: #374151;
+  background-color: blue;
+   color:white;
 }
 
 .table-wrapper {
@@ -355,3 +373,28 @@ h2 {
     margin-bottom: 15px;
     font-size: 1.2rem;
     color
+
+btn {
+  padding: 10px;
+  background-color: white;
+  color: black; /* Set text color to black for better contrast on white background */
+
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Added color transition */
+}
+.btn a:hover{
+  color: white;
+  text-decoration: none;
+}
+
+.btn a{
+
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #3163f7;
+  color:white; /* Set text color to white for better contrast on blue background */
+}
