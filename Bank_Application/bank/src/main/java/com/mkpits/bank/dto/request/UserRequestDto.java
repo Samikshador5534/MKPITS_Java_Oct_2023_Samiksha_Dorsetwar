@@ -1,5 +1,6 @@
 package com.mkpits.bank.dto.request;
 
+import com.mkpits.bank.model.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -36,6 +37,14 @@ public class UserRequestDto {
     private String account_Type;
     private String password;
     private String passwordSalt;
+
+
+    private String city;
+    private String district;
+    private String state;
+    private double balance;
+    private Integer userId;
+
 }
 
 

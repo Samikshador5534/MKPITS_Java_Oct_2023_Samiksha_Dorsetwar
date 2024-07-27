@@ -7,5 +7,10 @@ import java.util.List;
 public interface IAccountService {
     public List<AccountResponseDto> getAllUserAccounts(Integer userId);
 
+    List<AccountResponseDto> getAllAccounts();
 
+
+//    long getTotalAccounts();
+
+    long countTotalAccounts();
 }

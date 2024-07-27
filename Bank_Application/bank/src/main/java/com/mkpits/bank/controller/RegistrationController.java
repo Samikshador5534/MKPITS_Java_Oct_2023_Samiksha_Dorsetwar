@@ -12,4 +12,9 @@ public class RegistrationController {
     {
         return "Registration";
     }
+
+    @GetMapping("/employeeregister")
+    public  String employee(){
+        return  "employee-registration";
+    }
 }

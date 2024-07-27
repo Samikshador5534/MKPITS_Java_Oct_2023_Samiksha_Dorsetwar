@@ -39,4 +39,6 @@ public class UserCredential {
     private LocalDateTime updatedAt;
     @Column(name = "updated_by")
     private Integer updatedBy;
+
+
 }

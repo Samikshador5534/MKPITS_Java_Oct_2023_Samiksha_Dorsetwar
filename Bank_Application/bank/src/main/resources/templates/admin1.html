@@ -49,7 +49,7 @@
             <div class="card">
                 <div class="card-content">
                     <h3>Total Accounts</h3>
-                    <h2>1234</h2>
+                    <h2 th:text="${totalAccounts}"></h2>
                 </div>
             </div>
             <div class="card">
@@ -186,13 +186,20 @@
                         <button  onclick="updateUser(1)">
                             <a th:href="'/userdetails/v1/' + ${user.id}">
 
-                                <img src="/images/edit.png" alt="Update" />
+<!--                                <img src="/images/profile.png" alt="Update" />-->
+                                <img src="/images/employee.png" alt="Update" />
                             </a>
 
                         </button>
-                        <button onclick="deleteUser(1)">
-                            <img src="/images/delete.png" alt="Delete" />
-                        </button>
+<!--                        <button onclick="deleteUser(1)">-->
+<!--                            <img src="/images/user1.png" alt="Delete" />-->
+<!--                        </button>-->
+
+                        <form th:action="'/admin1/user/delete/' + ${user.id}" method="post">
+                            <button type="submit">
+                                <img src="/images/user1.png" alt="Delete" />
+                            </button>
+                        </form>
 <!--                        <button onclick="deactivateUser(1)">-->
 <!--                            <img src="/images/deactivate-user.png" alt="Deactivate" />-->
 <!--                        </button>-->
@@ -211,23 +218,22 @@
                 <tr>
                     <th> ID</th>
                     <th> UserID</th>
-                    <th>Name</th>
                     <th>Account Type</th>
                     <th>Account No</th>
                     <th> Balance</th>
-                    <th> ROI</th>
+                    <th>Opening Date</th>
+
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>Jane Smith</td>
-                    <td>Saving</td>
-                    <td>4567767753</td>
-                    <td>1300</td>
-                    <td>3.6</td>
+                <tr th:each="account :${account_management}">
+                    <td th:text="${account.id}"></td>
+                    <td th:text="${account.userId}"></td>
+                    <td th:text="${account.account_type}"></td>
+                    <td th:text="${account.accountNo}"></td>
+                    <td th:text="${account.balance}"></td>
+                    <td th:text="${account.opening}"></td>
                     <td class="action-icons">
                         <button onclick="updateAccount(1)">
                             <img src="/images/edit.png" alt="Update" />
@@ -247,7 +253,7 @@
 
     <section id="manageEmployees">
         <h2>Manage Employees</h2>
-        <button class="btn" onclick="createEmployee()">Create Employee</button>
+        <button class="btn" onclick="createEmployee()">  <a href="/employeeregister">Create Employee </a></button>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -259,28 +265,28 @@
                     <th>Gender</th>
                     <th>City</th>
 
-                    <th>Actions</th>
+<!--                    <th>Actions</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="employee :${employee_management}">
-                    <td th:text="${employee.id}">1</td>
+                    <td th:text="${employee.id}"></td>
                     <td th:text="${employee.firstName}+' '+${employee.lastName}"></td>
                     <td th:text="${employee.email}"> </td>
                     <td th:text="${employee.mobile}"></td>
                     <td th:text="${employee.gender}"></td>
                     <td th:text="${employee.city}"></td>
-                    <td class="action-icons">
-                        <button onclick="updateEmployee(1)">
-                            <img src="/images/edit.png" alt="Update" />
-                        </button>
-                        <button onclick="deleteEmployee(1)">
-                            <img src="/images/delete.png" alt="Delete" />
-                        </button>
-                        <button onclick="deactivateEmployee(1)">
-                            <img src="/images/deactivate-user.png" alt="Deactivate" />
-                        </button>
-                    </td>
+<!--                    <td class="action-icons">-->
+<!--                        <button onclick="updateEmployee(1)">-->
+<!--                            <img src="/images/user-details.png" alt="Update" />-->
+<!--                        </button>-->
+<!--                        <button onclick="deleteEmployee(1)">-->
+<!--                            <img src="/images/garbage.png" alt="Delete" />-->
+<!--                        </button>-->
+<!--&lt;!&ndash;                        <button onclick="deactivateEmployee(1)">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <img src="/images/deactivate-user.png" alt="Deactivate" />&ndash;&gt;-->
+<!--&lt;!&ndash;                        </button>&ndash;&gt;-->
+<!--                    </td>-->
                 </tr>
                 </tbody>
             </table>
@@ -297,33 +303,24 @@
                     <th>User ID</th>
                     <th>Account Number</th>
                     <th>Transaction Type</th>
-                    <th>Amount</th>
-                    <th>Date</th>
+                    <th>Transaction Status</th>
+                    <th>Remark</th>
                     <th>Created At</th>
                     <th>Created By</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>101</td>
-                    <td>12345678901234</td>
-                    <td>Deposit</td>
-                    <td>1500.00</td>
-                    <td>2023-06-28</td>
-                    <td>2023-06-28 14:23:00</td>
-                    <td>Admin</td>
+                <tr th:each="transaction :${transaction_management}">
+                    <td th:text="${transaction.id}"></td>
+                    <td th:text="${transaction.userId}"></td>
+                    <td th:text="${transaction.accountNumber}"></td>
+                    <td th:text="${transaction.transactionType}"></td>
+                    <td th:text="${transaction.transactionStatus}"></td>
+                    <td th:text="${transaction.remark}"></td>
+                    <td th:text="${transaction.createdAt}"></td>
+                    <td th:text="${transaction.createdBy}"></td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>102</td>
-                    <td>23456789012345</td>
-                    <td>Withdrawal</td>
-                    <td>500.00</td>
-                    <td>2023-06-29</td>
-                    <td>2023-06-29 10:00:00</td>
-                    <td>Admin</td>
-                </tr>
+
                 <!-- Add more rows as needed -->
                 </tbody>
             </table>
@@ -419,10 +416,6 @@
     });
 
 
-
-    function deleteUser(userId) {
-        alert(`Delete user with ID: ${userId}`);
-    }
 
     function deactivateUser(userId) {
         alert(`Deactivate user with ID: ${userId}`);

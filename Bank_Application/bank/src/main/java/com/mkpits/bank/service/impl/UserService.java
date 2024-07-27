@@ -2,14 +2,8 @@ package com.mkpits.bank.service.impl;
 
 import com.mkpits.bank.dto.request.UserRequestDto;
 import com.mkpits.bank.dto.response.UserResponseDto;
-import com.mkpits.bank.model.Account;
-import com.mkpits.bank.model.Address;
-import com.mkpits.bank.model.User;
-import com.mkpits.bank.model.UserCredential;
-import com.mkpits.bank.repository.AccountRepository;
-import com.mkpits.bank.repository.AddressRepository;
-import com.mkpits.bank.repository.UserCredentialRepository;
-import com.mkpits.bank.repository.UserRepository;
+import com.mkpits.bank.model.*;
+import com.mkpits.bank.repository.*;
 import com.mkpits.bank.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService implements IUserService {
@@ -33,6 +28,16 @@ public class UserService implements IUserService {
 
     @Autowired
     AddressRepository addressRepository;
+
+    @Autowired
+    UserCityRepository userCityRepository;
+
+    @Autowired
+    UserDistrictRepository userDistrictRepository;
+
+    @Autowired
+    UserStateRepository userStateRepository;
+
 
 
     @Override
@@ -55,6 +60,12 @@ public class UserService implements IUserService {
         }
         return userDto;
     }
+
+    public void deleteUserById(Integer id) {
+        userRepository.deleteById(Long.valueOf(id));
+    }
+
+
 
     private UserResponseDto convertUserModelToUserDto(User user) {
         UserResponseDto getUserDto =UserResponseDto.builder()
@@ -90,10 +101,10 @@ public class UserService implements IUserService {
         return getUserDto;
     }
 
-   @Override
+    @Override
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
         User user = convertUserRequestDtoToUser(userRequestDto);
-       String cinNo= String.valueOf(LocalDateTime.now()).replaceAll("[^0-9]", "").substring(0,17);
+        String cinNo= String.valueOf(LocalDateTime.now()).replaceAll("[^0-9]", "").substring(0,17);
         user.setCin(cinNo);
         user.setCreatedAt(LocalDateTime.now());
         user.setCreatedBy(1);
@@ -103,10 +114,31 @@ public class UserService implements IUserService {
         Account account = new Account();
         account.setUserId(user.getId());
         account.setAccount_type(userRequestDto.getAccount_Type());
-        String cityCode = "456";String districtCode="852";String stateCode="624";String remaingAccountNumber = "0123";
-        account.setAccountNo(stateCode+cityCode+districtCode+remaingAccountNumber);
+//        String cityCode = "456";String districtCode="852";String stateCode="624";String remaingAccountNumber = "0123";
+//        account.setAccountNo(stateCode+cityCode+districtCode+remaingAccountNumber);
+//        account.setOpening(LocalDate.now());
+//        account.setBalance(0.0);
+
+        //getting account number here
+        State state = userStateRepository.findStateByName(userRequestDto. getState());
+        District district =  userDistrictRepository.findDistrictByName(userRequestDto.getDistrict());
+        City city =  userCityRepository.findCityByName(userRequestDto.getCity());
+
+        //getting last acc number for increasing new by one
+        String lastAccountNumber = accountRepository.findLastAccountNumber();
+
+        String lastFourDigitAccountNum = lastAccountNumber.substring(lastAccountNumber.length()-4);
+
+        Integer parseFourDigitToInt = Integer.valueOf(lastFourDigitAccountNum)+1;
+        //the above parsing into integer and adding 1
+
+        String finalAccountNumber = String.format("%04d", parseFourDigitToInt);
+/*
+        System.out.println(String.format("%04d",city.getId()));
+*/
+        account.setAccountNo(String.format("%02d",state.getId())+String.format("%04d",district.getId())+String.format("%04d",city.getId())+finalAccountNumber);
         account.setOpening(LocalDate.now());
-        account.setBalance(0.0);
+        account.setBalance(account.getBalance());
         account = accountRepository.save(account);
 
 
@@ -121,6 +153,7 @@ public class UserService implements IUserService {
         address.setUserId(user.getId());
         address.setAddress(userRequestDto.getAddress());
         address.setPinCode(userRequestDto.getPinCode());
+
         address = addressRepository.save(address);
 
         return convertUserModelToUserDto(user , userCredential , address ,account);

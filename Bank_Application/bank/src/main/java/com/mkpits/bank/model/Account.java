@@ -44,4 +44,14 @@ public class Account {
 
     @Column(name = "closing_date")
     private LocalDate closing;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+
+    public Account orElse(Object o) {
+        return null;
+    }
 }

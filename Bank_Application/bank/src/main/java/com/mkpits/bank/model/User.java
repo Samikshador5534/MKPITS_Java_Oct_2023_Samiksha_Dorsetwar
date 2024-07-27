@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @Getter
@@ -47,5 +48,7 @@ public class User {
 
     @Column(name = "created_by")
     private Integer createdBy;
+
+
 }
 

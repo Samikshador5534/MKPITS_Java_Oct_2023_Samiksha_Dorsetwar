@@ -24,4 +24,6 @@ public class UserResponseDto {
     private String address;
     private String pincode;
     private String account_type;
+
+
 }

@@ -13,6 +13,9 @@ public interface IUserService {
 
     UserResponseDto createUser(UserRequestDto userRequestDto);
 
+    void deleteUserById(Integer id);
+
+
 
 //    UserResponseDto getUser(Integer id);
 }

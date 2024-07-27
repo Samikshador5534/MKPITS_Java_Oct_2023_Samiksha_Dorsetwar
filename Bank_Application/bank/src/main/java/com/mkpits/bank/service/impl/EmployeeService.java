@@ -1,10 +1,10 @@
 package com.mkpits.bank.service.impl;
 
+import com.mkpits.bank.dto.request.EmployeeRequestDto;
 import com.mkpits.bank.dto.response.EmployeeResponseDto;
 
 import com.mkpits.bank.model.Employee;
 import com.mkpits.bank.repository.EmployeeRepository;
-import com.mkpits.bank.repository.UserRepository;
 import com.mkpits.bank.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +29,25 @@ public class EmployeeService implements IEmployeeService {
            employeeResponseDtoList.add(getEmployeeDto);
         }
         return employeeResponseDtoList;
+
+    }
+
+    public EmployeeResponseDto createEmployee(EmployeeRequestDto employeeRequestDto) {
+        Employee employee = convertEmployeeDtoToEmployeeModel(employeeRequestDto);
+        Employee savedEmployee = employeeRepository.save(employee);
+        return convertEmployeeModelToEmployeeDto(savedEmployee);
+    }
+
+    private Employee convertEmployeeDtoToEmployeeModel(EmployeeRequestDto employeeRequestDto) {
+        return Employee.builder()
+                .firstName(employeeRequestDto.getFirstName())
+                .lastName(employeeRequestDto.getLastName())
+                .email(employeeRequestDto.getEmail())
+                .mobile(employeeRequestDto.getMobile())
+                .gender(employeeRequestDto.getGender())
+                .address(employeeRequestDto.getAddress())
+                .city(employeeRequestDto.getCity())
+                .build();
 
     }
 

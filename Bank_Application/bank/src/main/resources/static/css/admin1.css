@@ -188,7 +188,7 @@ h2 {
 }
 
 .btn {
-   background-color: blue;
+   background-color:#87cefa;
     color:white;
   padding: 10px 20px;
   border: solid;
@@ -324,8 +324,8 @@ font-size:20px;
           cursor: pointer;
         }
         .action-icons button img {
-          width: 20px;
-          height: 20px;
+          width: 30px;
+          height: 30px;
         }
 
 
