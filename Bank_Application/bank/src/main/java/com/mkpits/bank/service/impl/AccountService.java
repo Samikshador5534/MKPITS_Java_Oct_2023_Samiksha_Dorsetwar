@@ -1,12 +1,14 @@
 package com.mkpits.bank.service.impl;
 
+import com.mkpits.bank.dto.request.UserRequestDto;
 import com.mkpits.bank.dto.response.AccountResponseDto;
-import com.mkpits.bank.model.Account;
-import com.mkpits.bank.repository.AccountRepository;
+import com.mkpits.bank.model.*;
+import com.mkpits.bank.repository.*;
 import com.mkpits.bank.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,18 @@ public class AccountService implements IAccountService {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    UserStateRepository userStateRepository;
+
+    @Autowired
+    UserCityRepository userCityRepository;
+
+    @Autowired
+    UserDistrictRepository userDistrictRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     public List<AccountResponseDto> getAllUserAccounts(Integer userId) {
 //        System.out.println(userId);
@@ -70,5 +84,58 @@ public class AccountService implements IAccountService {
     public long countTotalAccounts() {
         return accountRepository.count();
     }
-}
+
+    @Override
+    public AccountResponseDto deleteAccount(String accountNo) {
+            String account = String.valueOf(accountRepository.findIdByAccountNumber(accountNo));
+
+            accountRepository.deleteById(Integer.valueOf(account));
+            System.out.println("User data with id: " + account + " deleted successfully");
+
+            return null;
+        }
+
+    @Override
+    public Integer getUserIdByAccountNo(String accountNo) {
+           Integer userId = accountRepository.findUserIdByAccountNumber(accountNo);
+           return userId;
+        }
+
+    @Override
+    public UserRequestDto addAccount(UserRequestDto userRequestDto) {
+        // Fetch the user entity from the database using userId
+
+        User user = userRepository.findById(Long.valueOf(userRequestDto.getUserId()))
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Create a new account entity
+        Account account = new Account();
+
+        //generating account number here
+        State state = userStateRepository.findStateByName(userRequestDto.getState());
+       District district =  userDistrictRepository.findDistrictByName(userRequestDto.getDistrict());
+        City city =  userCityRepository.findCityByName(userRequestDto.getCity());
+
+        //getting last account number for increasing new by one
+        String lastAccountnumber = accountRepository.findLastAccountNumber();
+
+        account.setAccountNo(String.format("%02d",state.getId())+String.format("%04d",district.getId())+String.format("%04d",city.getId())+String.format("%04d",Integer.valueOf(lastAccountnumber.substring(lastAccountnumber.length()-4))+1));
+
+
+        account.setBalance(userRequestDto.getBalance());
+        account.setAccount_type(userRequestDto.getAccount_Type());
+        account.setOpening(LocalDate.now());
+        account.setUserId(user.getId());
+
+
+        // Save the account entity to the database
+        Account savedAccount = accountRepository.save(account);
+
+
+        return userRequestDto;
+    }
+    }
+
+
+
 

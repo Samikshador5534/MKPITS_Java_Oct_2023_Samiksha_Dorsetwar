@@ -185,21 +185,21 @@
 <!--                        <a  href="userdetails/v1"></a>-->
                         <button  onclick="updateUser(1)">
                             <a th:href="'/userdetails/v1/' + ${user.id}">
-
-<!--                                <img src="/images/profile.png" alt="Update" />-->
-                                <img src="/images/employee.png" alt="Update" />
+<!--                              <img src="/images/profile.png" alt="Update" />-->
+                                <img src="/images/active-user.png" alt="Update" />
                             </a>
 
                         </button>
-<!--                        <button onclick="deleteUser(1)">-->
-<!--                            <img src="/images/user1.png" alt="Delete" />-->
-<!--                        </button>-->
+                        <button onclick="deleteUser(1)">
+                            <a th:href="'/admin1/updateForm/v1/'+ ${user.id}">
+                            <img src="/images/newedit.png" alt="Delete" /></a>
+                        </button>
 
-                        <form th:action="'/admin1/user/delete/' + ${user.id}" method="post">
-                            <button type="submit">
-                                <img src="/images/user1.png" alt="Delete" />
-                            </button>
-                        </form>
+<!--                        <form th:action="'/admin1/user/delete/' + ${user.id}" method="post">-->
+<!--                            <button type="submit">-->
+<!--                                <img src="/images/user1.png" alt="Delete" />-->
+<!--                            </button>-->
+<!--                        </form>-->
 <!--                        <button onclick="deactivateUser(1)">-->
 <!--                            <img src="/images/deactivate-user.png" alt="Deactivate" />-->
 <!--                        </button>-->

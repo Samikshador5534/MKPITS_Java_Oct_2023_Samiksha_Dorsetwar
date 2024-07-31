@@ -61,9 +61,9 @@ public class UserService implements IUserService {
         return userDto;
     }
 
-    public void deleteUserById(Integer id) {
-        userRepository.deleteById(Long.valueOf(id));
-    }
+//    public void deleteUserById(Integer id) {
+//        userRepository.deleteById(Long.valueOf(id));
+//    }
 
 
 
@@ -174,6 +174,60 @@ public class UserService implements IUserService {
                 .build();
     }
 
+    @Override
+    public UserResponseDto updateUser(UserRequestDto userRequestDto) {
+        Optional<User> optionalUser = userRepository.findById(Long.valueOf(userRequestDto.getId()));
+
+        if (optionalUser.isEmpty()){
+            System.out.println("User data with id: " + userRequestDto.getId() + " not found");
+        }else {
+            User user= optionalUser.get();
+            user.setFirstName(userRequestDto.getFirstName() != null && !userRequestDto.getFirstName()
+                    .equals(user.getFirstName()) ? userRequestDto.getFirstName() : user.getFirstName());
+
+            user.setMiddleName(userRequestDto.getMiddleName() != null && !userRequestDto.getMiddleName()
+                    .equals(user.getMiddleName()) ? userRequestDto.getMiddleName() : user.getMiddleName());
+
+            user.setLastName(userRequestDto.getLastName() != null && !userRequestDto.getLastName()
+                    .equals(user.getLastName()) ? userRequestDto.getLastName() : user.getLastName());
+
+            user.setGender(userRequestDto.getGender() != null && !userRequestDto.getGender()
+                    .equals(user.getGender()) ? userRequestDto.getGender() : user.getGender());
+
+            user.setEmail(userRequestDto.getEmail() != null && !userRequestDto.getEmail()
+                    .equals(user.getEmail()) ? userRequestDto.getEmail() : user.getEmail());
+
+            user.setMobile(userRequestDto.getMobile() != null && !userRequestDto.getMobile()
+                    .equals(user.getMobile()) ? userRequestDto.getMobile() : user.getMobile());
+
+            user.setDateOfBirth(userRequestDto.getDob() != null && !userRequestDto.getDob()
+                    .equals(user.getDateOfBirth()) ? userRequestDto.getDob() : user.getDateOfBirth());
+
+            user.setAadharCard(userRequestDto.getAdharNo() != null && !userRequestDto.getAdharNo()
+                    .equals(user.getAadharCard()) ? userRequestDto.getAdharNo() : user.getAadharCard());
+
+            user.setCreatedBy(2);
+            user.setCreatedAt(LocalDateTime.now());
+            userRepository.save(user);
+            return convertUserModelToUserDto1(user );
+        }
+
+
+     return UserResponseDto.builder().build();
+  }
+
+    private UserResponseDto convertUserModelToUserDto1(User user) {
+        return UserResponseDto.builder()
+                .firstName(user.getFirstName())
+                .middleName(user.getMiddleName())
+                .lastName(user.getLastName())
+                .gender(user.getGender())
+                .mobile(user.getMobile())
+                .email(user.getEmail())
+                .dob(user.getDateOfBirth())
+                .adharNo(user.getAadharCard())
+                .build();
+    }
 
 
 }

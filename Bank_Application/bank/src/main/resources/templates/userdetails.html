@@ -27,14 +27,20 @@
     </div>
     <div class="account-info">
         <h2>Account Information</h2>
+        <div class="update-form">
+                    <button  class="btn" onclick="createAccount()">
+                        <a th:href="@{/admin1/addaccountregistration/{userId}(userId=${admin1.id})}">Add Account</a>
+                    </button>
+                </div>
         <div class="table-wrapper">
             <table>
                 <thead>
                 <tr>
                     <th>Account No</th>
-                    <th>account_Type</th>
+                    <th>Account Type</th>
                     <th>Balance</th>
                     <th>opening</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,6 +49,15 @@
                     <td th:text="${account.account_type}"></td>
                     <td th:text="${account.balance}"></td>
                     <td th:text="${account.opening}"></td>
+
+                    <td class="action-icons">
+<!--                    <form th:action="'/admin1/user/delete/' + ${user.id}" method="post">-->
+                        <button onclick="deleteAccount(1)">
+                            <a th:href="@{/admin1/userdetails/delete/{accNo}(accNo=${account.accountNo})}">
+                                <img src="/images/bin.png" alt="Delete" /></a>
+                        </button>
+<!--                    </form>-->
+                    </td>
                 </tr>
                 </tbody>
             </table>

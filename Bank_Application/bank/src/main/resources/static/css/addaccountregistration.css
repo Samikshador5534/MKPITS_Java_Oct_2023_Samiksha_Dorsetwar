@@ -1,4 +1,4 @@
-/* updateuser.css */
+/* addaccountregistration.css */
 
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -13,10 +13,10 @@ body {
 
 .container {
   background-color: #ffffff;
-  padding: 30px; /* Reduced padding */
+  padding: 40px;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  width: 80%;
+  width: 90%;
   max-width: 600px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -28,41 +28,35 @@ body {
 
 h2 {
   text-align: center;
-  margin-bottom: 20px; /* Reduced margin */
+  margin-bottom: 30px;
   color: #333;
   font-size: 24px;
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 .form-row {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 10px; /* Reduced margin */
 }
 
 .form-group {
   flex: 1;
-  margin: 5px; /* Reduced margin */
+  margin: 10px;
   min-width: 250px;
 }
 
 label {
   display: block;
-  margin-bottom: 5px; /* Reduced margin */
+  margin-bottom: 8px;
   font-weight: bold;
   color: #555;
 }
 
 input[type="text"],
-input[type="email"],
-input[type="date"],
-input[type="password"],
-input[type="number"],
 select {
   width: 100%;
-  padding: 8px; /* Reduced padding */
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -71,10 +65,6 @@ select {
 }
 
 input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="date"]:focus,
-input[type="password"]:focus,
-input[type="number"]:focus,
 select:focus {
   border-color: #6a11cb;
   box-shadow: 0 0 8px rgba(106, 17, 203, 0.2);
@@ -82,7 +72,7 @@ select:focus {
 
 button {
   width: 100%;
-  padding: 10px; /* Reduced padding */
+  padding: 12px;
   background-color: #4caf50;
   border: none;
   border-radius: 4px;
@@ -107,4 +97,3 @@ button:active {
     margin: 10px 0;
   }
 }
-

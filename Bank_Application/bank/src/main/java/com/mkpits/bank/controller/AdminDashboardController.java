@@ -15,10 +15,7 @@ import com.mkpits.bank.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -55,8 +52,15 @@ ITransactionService iTransactionService;
             return "admin1";
         }
 
+//    @GetMapping("/admindashboard/user")
+//    public String admin1(Model model)
+//    {
+//        List<UserResponseDto> user = iUserService.getAllUsers();
+//        model.addAttribute("admin1",user);
+//        return "admin1";}
 
-    @GetMapping("/admin-dashboard")
+
+        @GetMapping("/admin-dashboard")
     public String getDashboard(Model model) {
         long totalAccounts = iAccountService.countTotalAccounts();
         model.addAttribute("totalAccounts", totalAccounts);
@@ -102,12 +106,68 @@ ITransactionService iTransactionService;
             return "admin1";
     }
 
-    @PostMapping("/admin1/user/delete/{id}")
-    public String deleteUser(@PathVariable("id") Integer id, Model model) {
-        iUserService.deleteUserById(id);
+//    @PostMapping("/admin1/user/delete/{id}")
+//    public String deleteUser(@PathVariable("id") Integer id, Model model) {
+//        iUserService.deleteUserById(id);
+//        List<UserResponseDto> users = iUserService.getAllUsers();
+//        model.addAttribute("admin1", users);
+//        return "admin1"; // The view name of the admin page
+//    }
+
+    @GetMapping("/admin1/updateForm/v1/{userId}")
+    public String userUpdateRegistrationForm(@PathVariable("userId") Integer userId, Model model) {
+        //to get detail of perticular id of user
+        UserResponseDto userResponseDto = iUserService.getUserByIdUser(userId);
+        model.addAttribute("admin1", userResponseDto);
+        return "updateuser";
+    }
+
+
+
+    //update post
+    @PostMapping("/admin1/update/v1/{id}")
+    public String updatePartialUser(@PathVariable("id") Integer id, @ModelAttribute UserRequestDto userRequestDto, Model model) {
+        userRequestDto.setId(id);
+        UserResponseDto userResponseDto = iUserService.updateUser(userRequestDto);
         List<UserResponseDto> users = iUserService.getAllUsers();
         model.addAttribute("admin1", users);
-        return "admin1"; // The view name of the admin page
+        return "admin1";
     }
+
+    //delete
+    @GetMapping("/admin1/userdetails/delete/{accNo}")
+    public String deleteAccount(@PathVariable("accNo") String accNo , Model model) {
+
+        Integer userId = iAccountService.getUserIdByAccountNo(accNo);
+        AccountResponseDto accountResponseDto = iAccountService.deleteAccount(accNo);
+        UserResponseDto userDto = iUserService.getUserByIdUser(userId);
+        List<AccountResponseDto> accountResponseDtoList = iAccountService.getAllUserAccounts(userId);
+        model.addAttribute("admin1", userDto);
+        model.addAttribute("accounts", accountResponseDtoList);
+        return "userdetails";
+
+    }
+
+    @GetMapping("/admin1/addaccountregistration/{userId}")
+    public String showAddAccountRegistrationForm(@PathVariable("userId") Integer userId, Model model) {
+        model.addAttribute("userRequestDto", new UserRequestDto());
+        model.addAttribute("userId", userId);
+        return "addaccountregistration";
+    }
+
+    @PostMapping("/admin1/userdetails/addaccountregistration")
+    public String addAccountRegister(@RequestParam("userId") Integer userId, @ModelAttribute UserRequestDto userRequestDto, Model model) {
+        userRequestDto.setUserId(userId);
+        UserRequestDto userResponseDto = iAccountService.addAccount(userRequestDto);
+        model.addAttribute("account", userResponseDto);
+
+        UserResponseDto userDto = iUserService.getUserByIdUser(userId);
+
+        List<AccountResponseDto> accountResponseDtoList = iAccountService.getAllUserAccounts(userId);
+        model.addAttribute("accounts", accountResponseDtoList);
+        model.addAttribute("admin1", userDto);
+        return "userdetails";
+    }
+
 }
 
